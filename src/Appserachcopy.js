@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   let [search, setSearch] = useState('')
 
-  let [data] = useState([{ name: 'raheel', age: '21', qualification: 'bcs' },
+  let [data, setData] = useState([{ name: 'raheel', age: '21', qualification: 'bcs' },
   { name: 'rasim', age: '20', qualification: 'imnter' },
   { name: 'daniyal', age: '18', qualification: 'matrik' },
   { name: 'raheel', age: '10', qualification: 'nine' },
@@ -18,11 +18,17 @@ function App() {
     
   }
 
+  let newVlaues=data.filter((values)=>{
+    return values.name.includes(search)
+  })
 
-
+  // const searhcFnc=()=>{
+   
+  // }
   return (
     <div className="App">
       <input type="text" placeholder='serach here' value={search} onChange={handleSearch} />
+      {/* <button onClick={searhcFnc}>Search</button> */}
       <table border='1'>
         <tr>
           <th>Name</th>
@@ -31,23 +37,19 @@ function App() {
 
 
         </tr>
-       {data?.filter((filteredValue)=>{
-           return filteredValue.name.toLowerCase().includes(search.toLowerCase()) || 
-           filteredValue.qualification.toLowerCase().includes(search.toLowerCase()) ||
-           filteredValue.age.toLowerCase().includes(search.toLowerCase()) 
-       }).map((values)=>{
-        return(
-          <>
-             <tr>
-          <th>{values.name}</th>
-          <th>{values.age}</th>
-          <th>{values.qualification}</th>
+        {newVlaues?.map((values) => {
+          return (
+            <>
+              <tr>
+                <th>{values.name}</th>
+                <th>{values.age}</th>
+                <th>{values.qualification}</th>
 
 
-        </tr>
-          </>
-        )
-       })}
+              </tr>
+            </>
+          )
+        })}
 
       </table>
     </div>
